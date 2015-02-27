@@ -1,0 +1,21 @@
+#ui.R
+#QTM 100
+
+library(shiny)
+
+p <- read.csv("qtm simple.csv", na.strings="")
+q <- na.omit(p)
+
+shinyUI(pageWithSidebar(
+  headerPanel('QTM 100 - k means clustering'),
+  sidebarPanel(
+    selectInput('xcol', 'X Variable', names(q)),
+    selectInput('ycol', 'Y Variable', names(q),
+                selected=names(q)[[3]]),
+    numericInput('clusters', 'Cluster count', 3,
+                 min = 1, max = 4)
+  ),
+  mainPanel(
+    plotOutput('plot1')
+  )
+))
